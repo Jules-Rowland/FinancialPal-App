@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { PublicRoutes } from "./PublicRoutes";
-import { PrivateRoutes } from "./PrivateRoute";
+import {PublicRoutes} from "./routes/PublicRoutes";
+import { PrivateRoutes } from "./routes/PrivateRoute";
 
 function App() {
   return (
