@@ -5,27 +5,14 @@ import Login from "../pages/PublicPages/Login"
 import Signup from "../pages/PublicPages/Signup"
 
 export const PublicRoutes = 
- [
-          {path:"/",
-          element:( <PublicLayout>
-              <LandingPage />
-            </PublicLayout>),
-           
-          },
-        
-       { 
-          path: "/login",
-          element:( <PublicLayout>
-              <Login/>
-            </PublicLayout>),
-          },
-     {
-          path:"/signup",
-          element:( <PublicLayout>
-              <Signup/>
-            </PublicLayout>),
-           
-          }
- 
-      
+   {
+  element: <PublicLayout />,   // parent layout defined once
+  children: [
+    { path: "/", element: <LandingPage /> },
+    { path: "/login", element: <Login /> },
+    { path: "/signup", element: <Signup/> },
   ]
+}
+  
+
+ 

@@ -6,48 +6,13 @@ import { Settings } from "../pages/Protected/Settings";
 import { SpendSense } from "../pages/Protected/SpendSense";
 import { Trek } from "../pages/Protected/Trek";
 export const PrivateRoutes = 
-[
-    
-          {path:"/dashboard",
-          element:(
-            <PrivateLayout>
-              <Dashboard />
-            </PrivateLayout>
-          ),
-      },
-
-      {
-          path:"/dreambud",
-          element:(
-            <PrivateLayout>
-              <DreamBud />
-            </PrivateLayout>
-          ),
-      },
-
-      {
-          path:"/spendSense",
-          element:(
-            <PrivateLayout>
-              <SpendSense />
-            </PrivateLayout>
-          ),
-          },
-       {
-          path:"/settings",
-          element:(
-            <PrivateLayout>
-              <Settings />
-            </PrivateLayout>
-         ),
-        },
-       {
-          path:"/trek",
-          element:( <PrivateLayout>
-              <Trek />
-            </PrivateLayout>)
-           
-          
-        }
-        ]
-
+{
+  element: <PrivateLayout />,   // parent layout defined once
+  children: [
+    { path: "/dashboard", element: <Dashboard /> },
+    { path: "/dreambud", element: <DreamBud /> },
+    { path: "/spendsense", element: <SpendSense /> },
+    { path: "/settings", element: <Settings /> },
+    { path: "/trek", element: <Trek /> },
+  ]
+}

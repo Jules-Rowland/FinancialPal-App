@@ -1,7 +1,13 @@
-function PublicLayout({ children }){
+import { Outlet } from "react-router-dom"
+import { Header } from "./Header"
+import { Footer } from "./Footer"
+
+function PublicLayout(){
     return (
         <>
-        { children }
+        <Header/>
+        <Outlet/>
+        <Footer/>
         </>
     )
 

@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { auth } from "../../services/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 
 function Signup() {
   const [values, setValues] = useState({
@@ -9,15 +11,45 @@ function Signup() {
     password: "",
     confirmPassword: "",
   });
+  const [erroremail, setErrorEmail] = useState('');
+  const [errorpassword, setErrorPassword] = useState('');
+  const userState = useContext(Response);
+   const typingTimer = useRef(null);
+   const navigate = useNavigate();
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setValues((preValue) => {
       const newValue = { ...preValue, [name]: value };
       console.log(newValue);
       return newValue;
     });
+
+    if (name ==="email"  || name === "password")
+      if (typingTimer.current) clearTimeout(typingTimer.current);
+      typingTimer.current = setTimeout(()=>{
+            validateField(name, value);
+      }, 2000)
+  }
+
+    const validateField = (name, value) => {
+    
+      if (name === "email") {
+        if (!value.includes("@")) setErrorEmail("Invalid Email");
+        else setErrorEmail("");
+      }
+
+      if (name === "password") {
+        if (value.length < 6) setErrorPassword("Password too short");
+        else setErrorPassword("");
+      }
+    
   };
+  
+
 
   const resetForm = () => {
     setValues({ name: "", email: "", password: "", confirmPassword: "" });
@@ -35,6 +67,7 @@ function Signup() {
   try {
     const userInfo = await createUserWithEmailAndPassword(auth, email, password);
     console.log("User signed up:", userInfo.user);
+    navigate("/Dashboard");
     resetForm(); // Clear the form on success
   } catch (error) {
     console.log("Error signing up:", error.message);
@@ -48,7 +81,8 @@ function Signup() {
       console.log("Password should be at least 6 characters.");
     }
   }
-};
+}
+
 
   return (
     <div className="bg-[#0076DA] w-full min-h-screen ">
@@ -73,6 +107,7 @@ function Signup() {
             value={values.email}
             onChange={handleChange}
           />
+          <span>{erroremail}</span>
 
           <label htmlFor="password">Password</label>
           <input
@@ -83,6 +118,7 @@ function Signup() {
             value={values.password}
             onChange={handleChange}
           />
+          <span>{errorpassword}</span>
 
           <label htmlFor="confirmPassword">Confirm Password</label>
 
@@ -94,6 +130,9 @@ function Signup() {
             value={values.confirmPassword}
             onChange={handleChange}
           />
+          <span>{values.password !== values.confirmPassword ? "Password do not match" : ""}</span>
+
+
           <button className="bg-blue-500 text-white p-2 m-2 w-50">
             Sign up
           </button>
@@ -102,4 +141,4 @@ function Signup() {
     </div>
   );
 }
-export default Signup;
+export default Signup
