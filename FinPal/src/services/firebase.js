@@ -13,8 +13,7 @@ const firebaseConfig = {
   appId:firebaseVariables.appId,
 
 };
-console.log(import.meta.env.VITE_FIREBASE_API_KEY);
-console.log("Firebase variables:", firebaseConfig);
+
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);

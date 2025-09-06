@@ -19,7 +19,10 @@ const onSubmit= async(data)=>{
    console.log("User signed up:", validate);
        navigate("/Dashboard");
  } catch (error) {
-  console.log("Error signing up:", error.message);
+  console.log("Full error object:", error); // Log the full error
+    console.log("Error code:", error.code);   // Log the error code
+    console.log("Error message:", error.message); // Log the message
+    alert("Login failed: " + error.message);
  }
 
 
@@ -63,8 +66,8 @@ const onSubmit= async(data)=>{
 
               <div>{errors.password && <span>{errors.password.message}</span>}</div>
 
-            <button className="bg-blue-500 text-white p-2 m-2 w-50" >
-            Sign up
+            <button className="bg-blue-500 text-white p-2 m-2 w-50" type="submit">
+           Login
           </button>
           </form>
           </div>

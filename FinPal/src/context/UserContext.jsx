@@ -8,7 +8,7 @@ export const Response = createContext({user: null, setUser: () => {}});
 
 export const FirebaseResponse =() =>{
     
-const [user, setUser]  = useState("");
+const [user, setUser]  = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => 

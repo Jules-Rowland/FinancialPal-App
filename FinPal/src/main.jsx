@@ -9,9 +9,8 @@ import './themes.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <FirebaseResponse>   
-      <App />
-    </FirebaseResponse>
+    
+    <FirebaseResponse/>
  
   </StrictMode>,
 )

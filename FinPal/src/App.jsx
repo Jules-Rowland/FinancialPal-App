@@ -1,12 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import {PublicRoutes} from "./routes/PublicRoutes";
 import { PrivateRoutes } from "./routes/PrivateRoute";
 import PublicLayout from "./Layouts/PublicLayout/PublicLayout";
 import PrivateLayout from "./Layouts/ProtectedLayouts/PrivateLayout";
 import { Notfound } from "./Layouts/PublicLayout/notfound";
+import { initFlowbite } from 'flowbite';
+
 function App() {
+   useEffect(() => {
+    initFlowbite();
+  }, []);
   return (
    <Router>
+    
       <Routes>
         <Route element={<PublicLayout />}>
           {PublicRoutes.children.map((route) => (
@@ -17,7 +24,7 @@ function App() {
             />
           ))}
         </Route>
-        {/* Private Routes wrapped once in PrivateLayout */}
+        
         <Route element={<PrivateLayout />}>
           {PrivateRoutes.children.map((route) => (
             <Route
@@ -28,7 +35,7 @@ function App() {
           ))}
         </Route>
 
-        {/* Fallback for 404 */}
+       
         <Route path="*" element={<Notfound />} />
       </Routes>
     </Router>
