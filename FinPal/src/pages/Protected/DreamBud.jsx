@@ -2,7 +2,7 @@ import { getDocs, collection, query, addDoc } from "firebase/firestore";
 import { useEffect, useState, useContext } from "react";
 import { db } from "../../services/firebase";
 import { Response } from "../../context/UserContext";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 export const DreamBud = () => {
@@ -525,6 +525,7 @@ export const DreamBud = () => {
       ) : FilteredGoals() === 0 ? null : (
         // Map through filtered goals and display each one
         FilteredGoals().map((goal) => (
+            <Link to={`/trek/${goal.id}`} key={goal.id}>
           <div key={goal.id} className="finpal-goals-container">
             <div className="finpal-goal-card">
               
@@ -570,6 +571,7 @@ export const DreamBud = () => {
               </div>
             </div>
           </div>
+          </Link>
         ))
       )}
     </>

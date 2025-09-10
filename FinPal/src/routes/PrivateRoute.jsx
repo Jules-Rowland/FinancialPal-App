@@ -14,5 +14,6 @@ export const PrivateRoutes =
     { path: "/spendsense", element: <SpendSense /> },
     { path: "/settings", element: <Settings /> },
     { path: "/trek", element: <Trek /> },
+    { path: "/trek/:goalId", element: <Trek />},
   ]
 }
